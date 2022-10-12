@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<title>Cycler</title>
+	<style>
+		.flex-container {
+			display: flex;
+			flex-direction: row;
+			background-color:hotpink;
+		}
+
+		.flex-container>div {
+			/*div children of the flex container*/
+			background-color: #f1f1f1;
+			margin: 10px;
+			padding: 20px;
+			font-size: 30px;
+		}
+
+		/* Responsive layout */
+		@media (max-width: 600px) {
+			.flex-container {
+				flex-direction: column;
+				background-color:plum;
+			}
+		}
+	</style>
+</head>
+
+<body>
+
+	<h1>Shrinidhi Yadavally builds a cycler</h1>
+	<br>
+
+	<div class="flex-container" id="target">
+		<div class="cycler">row item 1</div>
+		<div class="cycler">row item 2</div>
+		<div class="cycler">row item 3</div>
+	</div>
+	<br>
+
+	<p>Press the button to create an new element of type div and then add it to the container.</p>
+	<br>
+
+	<div class="container border">
+		<input id="inputElement" type="text">
+	</div>
+	<br>
+
+	<button onclick="makeNewDiv()">Add value</button>
+	<button onclick="get()">Get</button>
+	<button onclick="spin()">Spin</button>
+	
+
+</body>
+
+<script>
+	function makeNewDiv() {
+		let element = document.createElement("div")
+
+		element.innerHTML = document.getElementById("inputElement").value
+		element.style.color = "orange"
+		element.className = "cycler"
+
+		let container = document.getElementById('target')
+		container.appendChild(element)
+	}
+
+	function get() {
+		var cyclerItems = []
+		cyclerItems = document.getElementsByClassName("cycler")
+		length = cyclerItems.length
+		if(length > 0)
+			cyclerItems[length - 1].remove()
+	}
+
+	function spin() {
+		var cyclerItems = []
+		cyclerItems = document.getElementsByClassName("cycler")
+		length = cyclerItems.length
+		if(length > 1) {
+			removedItem = document.createElement("div")
+			removedItem.innerHTML = cyclerItems[length - 1].textContent
+			removedItem.style.color = "blue"
+			removedItem.className = "cycler"
+			cyclerItems[length - 1].remove()
+			document.getElementById("target").insertBefore(removedItem, cyclerItems[0])
+		}
+	}
+
+	
+</script>
+
+</html>
